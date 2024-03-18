@@ -1,20 +1,22 @@
 # Tom y Jerry (y Nibbles también!)
 
 ## Parte 1: velocidad máxima
-Hacer un sistema en wollok que modele al gato tom y a los ratones jerry y nibbles 
+Hacer un sistema en wollok que modele al gato tom y
+ a los ratones jerry y nibbles 
 
 El sistema tiene dos casos de uso principales: 
-* Indicar que tom comió un ratón ( aclarando cuál ratón comió)  
-* Indicar que tom corrió una distancia (aclarando cuantos metros). 
+* Indicar que tom comió un ratón 
+( aclarando cuál ratón comió)  
 
-Lo que nos interesa de tom es saber la velocidad máxima a la que puede correr.
+* Indicar que tom corrió una distancia (aclarando cuantos metros). 
+* Lo que nos interesa de tom es saber la velocidad máxima a la que puede correr.
 
 La velocidad máxima depende de la energía que tenga. 
 
 La energía va a variar según vaya comiendo ratones y corriendo por ahí:
 
-* Cuando tom corre, su energía disminuye en `cantidad de metros que corrió / 2` 
 * Cuando tom come un ratón, su energía aumenta en `12 + el peso del ratón` 
+* Cuando tom corre, su energía disminuye en `cantidad de metros que corrió / 2` 
 * La velocidad máxima de tom es `5 + energía/10`
 
 Tom comienza con 50 de energía
@@ -41,7 +43,9 @@ Se agrega como requerimientos
 * Saber si tom puede comer un ratón que está a cierta distancia (indicando la distancia)
 * Saber si tom quiere comer un ratón que está a cierta distancia (indicando el ratón y la distancia)
 
-Puede comer si tiene energía suficiente para recorrer esa distancia. Es
+Puede comer si tiene energía suficiente para recorrer 
+esa distancia. 
+Es
 decir, la energía que gastaría en correr la distancia es menor a su propia
 energía
 
@@ -61,6 +65,52 @@ de energía y solo tiene 50), tampoco quiere comerlo porque no puede.
 - Tom puede comer a Nibbles está a 96 de distancia, (gastaría 48 de energia)
 Pero no lo va a querer comer, porque a pesar de poder, solo recibíra 47 de energia 
 
-- En cambio si Nibbles está a 60 metros, tom lo puede comer (gastaría 15 de energía)
+- En cambio si Nibbles está a 60 metros, tom lo puede comer (gastaría 30 de energía)
 y también lo va a querer comer (recibiría 47).
+
+### Parte 3: vehiculos
+
+Ahora tom se ayuda de un calzado para aumentar su 
+velocidad máxima, por lo que la nueva fórmula es:
+
+``` 
+ 5 + energía/10 + velocidadPorCalzado
+```
+Hay 3 calzados:
+
+* zapatos: la velocidad que agrega los zapatos es 0 
+* zapatillas: la velocidad que agrega las zapatillas es 10
+
+* patines: Si los patines están con las ruedas sucias, agrega 15,
+pero si los patines tienen las ruedas limpias, agrega 20.
+
+Tener en cuenta que:
+* Tom comienza con los zapatos.
+* Los patines comienzan limpios.
+* Los patines tienen que entender mensajes limpiar() y ensuciar().
+
+### Casos de prueba:
+
+- Si tom tiene zapatos, los casos de prueba son iguales los del punto 1
+
+- Si tom tiene zapatillas, los casos de prueba son parecidos a los del 
+punto 1, pero con 10 más:
+	```
+	- Al inicio, la velocidad máxima de Tom es 20 
+	- Si come a Jerry, la velocidad máxima pasa a ser  25.2 
+	- Si corre 24 metros, entonces su velocidad máxima pasa a ser 24 
+	```
+
+Pero al ponerse los patines vamos a probar lo siguiente:
+
+```
+	- Al inicio la velocidad máxima de tom es 30
+	- hacer que se ensucien los patines 
+	- Ahora la velocidad máxima de tom debe ser 25
+	- limpiar los patines
+	- Ahora la velocidad máxima de tom es 30 de nuevo
+```
+
+
+
 
